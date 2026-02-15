@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CLIENT
+  AGENT
+  ADMIN
+}
+
+enum PropertyType {
+  LAND
+  CONSTRUCTION
+  RENTAL
+  FARM
+}
+
+enum ServiceType {
+  QUICK
+  STANDARD
+  PREMIUM
+}
+
+enum ServiceStatus {
+  PENDING
+  ASSIGNED
+  COMPLETED
+  CANCELLED
+}
+
+enum RiskLevel {
+  LOW
+  MODERATE
+  HIGH
+}
+
+enum MediaType {
+  PHOTO
+  VIDEO
+}
+
+model User {
+  id               String           @id @default(uuid())
+  email            String           @unique
+  fullName         String
+  role             Role             @default(CLIENT)
+  country          String           @default("Kenya")
+  createdAt        DateTime         @default(now())
+  properties       Property[]
+  serviceRequests  ServiceRequest[]
+  inspectionReports InspectionReport[]
+}
+
+model Property {
+  id             String           @id @default(uuid())
+  userId         String
+  name           String
+  county         String
+  latitude       Float?
+  longitude      Float?
+  propertyType   PropertyType
+  createdAt      DateTime         @default(now())
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  serviceRequests ServiceRequest[]
+}
+
+model ServiceRequest {
+  id              String           @id @default(uuid())
+  userId          String
+  propertyId      String
+  serviceType     ServiceType
+  status          ServiceStatus    @default(PENDING)
+  basePrice       Float
+  distanceFee     Float            @default(0)
+  addOnsPrice     Float            @default(0)
+  totalPrice      Float
+  distanceKm      Float            @default(0)
+  scheduledDate   DateTime?
+  createdAt       DateTime         @default(now())
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  property        Property         @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  inspectionReport InspectionReport?
+}
+
+model InspectionReport {
+  id               String         @id @default(uuid())
+  serviceRequestId String         @unique
+  agentId          String
+  latitude         Float?
+  longitude        Float?
+  riskLevel        RiskLevel
+  summary          String
+  createdAt        DateTime       @default(now())
+  serviceRequest   ServiceRequest @relation(fields: [serviceRequestId], references: [id], onDelete: Cascade)
+  agent            User           @relation(fields: [agentId], references: [id])
+  media            Media[]
+}
+
+model Media {
+  id        String    @id @default(uuid())
+  reportId  String
+  type      MediaType
+  url       String
+  createdAt DateTime  @default(now())
+  report    InspectionReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+}
