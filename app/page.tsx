@@ -155,7 +155,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Site Inspections */}
             <div className="bg-white rounded-xl border border-slate-200 p-6">
               <FeatureIcon>
@@ -214,6 +214,51 @@ export default function HomePage() {
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
                 Structured reports with findings, risk assessments, and evidence for your due diligence.
+              </p>
+            </div>
+
+            {/* Construction Oversight */}
+            <div className="bg-white rounded-xl border border-slate-200 p-6">
+              <FeatureIcon>
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 4.5h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+                </svg>
+              </FeatureIcon>
+              <h3 className="text-lg font-semibold mb-2" style={{ color: "#0B1F3B" }}>
+                Construction Oversight
+              </h3>
+              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
+                Periodic site visits to monitor construction progress, verify material usage, and document milestones with photo evidence.
+              </p>
+            </div>
+
+            {/* Installation Verification */}
+            <div className="bg-white rounded-xl border border-slate-200 p-6">
+              <FeatureIcon>
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17l-5.67-5.67a8 8 0 1111.34 0l-5.67 5.67zm0 0l4.24 4.24m-4.24-4.24l-4.24 4.24M14.5 9.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                </svg>
+              </FeatureIcon>
+              <h3 className="text-lg font-semibold mb-2" style={{ color: "#0B1F3B" }}>
+                Installation Verification
+              </h3>
+              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
+                Independent checks on fittings, fixtures, and installations to confirm work was completed to specification and standard.
+              </p>
+            </div>
+
+            {/* Concierge Verification */}
+            <div className="bg-white rounded-xl border border-slate-200 p-6">
+              <FeatureIcon>
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+              </FeatureIcon>
+              <h3 className="text-lg font-semibold mb-2" style={{ color: "#0B1F3B" }}>
+                Concierge Verification
+              </h3>
+              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
+                A dedicated agent handles your full verification journey — from document collection to site visits — so you don&apos;t have to coordinate anything.
               </p>
             </div>
           </div>
