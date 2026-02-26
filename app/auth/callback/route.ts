@@ -1,4 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
+import { prisma } from "@/lib/prisma";
+import { getDashboardPath } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -7,7 +9,21 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = createClient();
-    await supabase.auth.exchangeCodeForSession(code);
+    const { data } = await supabase.auth.exchangeCodeForSession(code);
+
+    if (data?.user) {
+      const existingUser = await prisma.user.findUnique({
+        where: { id: data.user.id },
+      });
+
+      if (existingUser) {
+        return NextResponse.redirect(
+          `${origin}${getDashboardPath(existingUser.role)}`
+        );
+      }
+
+      return NextResponse.redirect(`${origin}/onboarding`);
+    }
   }
 
   return NextResponse.redirect(`${origin}/dashboard`);

@@ -46,6 +46,7 @@ export async function updateSession(request: NextRequest) {
     "/privacy",
     "/data-protection",
     "/independence",
+    "/onboarding",
   ];
 
   if (publicRoutes.includes(path) || path.startsWith("/auth")) {
