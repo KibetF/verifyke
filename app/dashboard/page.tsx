@@ -54,7 +54,7 @@ export default async function DashboardPage() {
             <p className="text-sm text-slate-500">No service requests yet.</p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+              <table className="w-full text-sm min-w-[480px]">
                 <thead>
                   <tr className="text-left text-slate-500 border-b border-slate-100">
                     <th className="pb-3 font-medium">Property</th>

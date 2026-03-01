@@ -3,8 +3,10 @@
 import { DashboardLayout } from "@/components/DashboardLayout";
 
 const agentNav = [
-  { label: "Assigned Requests", href: "/agent" },
+  { label: "Overview", href: "/agent" },
+  { label: "My Requests", href: "/agent/requests" },
   { label: "Submit Report", href: "/agent/report" },
+  { label: "My Reports", href: "/agent/reports" },
 ];
 
 export function AgentDashboardLayout({

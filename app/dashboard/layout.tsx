@@ -1,5 +1,6 @@
 import { requireAuth } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { NotificationProvider } from "@/components/NotificationProvider";
 
 export default async function DashboardRedirectLayout({
   children,
@@ -12,5 +13,10 @@ export default async function DashboardRedirectLayout({
   if (user.role === "ADMIN") redirect("/admin");
   if (user.role === "AGENT") redirect("/agent");
 
-  return <>{children}</>;
+  return (
+    <>
+      <NotificationProvider userId={user.id} />
+      {children}
+    </>
+  );
 }

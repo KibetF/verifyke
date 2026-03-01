@@ -34,6 +34,13 @@ enum ServiceStatus {
   CANCELLED
 }
 
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  BYPASSED
+}
+
 enum RiskLevel {
   LOW
   MODERATE
@@ -54,6 +61,7 @@ model User {
   createdAt        DateTime         @default(now())
   properties       Property[]
   serviceRequests  ServiceRequest[]
+  assignedRequests ServiceRequest[] @relation("AgentRequests")
   inspectionReports InspectionReport[]
 }
 
@@ -74,6 +82,7 @@ model ServiceRequest {
   id              String           @id @default(uuid())
   userId          String
   propertyId      String
+  agentId         String?
   serviceType     ServiceType
   status          ServiceStatus    @default(PENDING)
   basePrice       Float
@@ -82,9 +91,15 @@ model ServiceRequest {
   totalPrice      Float
   distanceKm      Float            @default(0)
   scheduledDate   DateTime?
+  paymentStatus   PaymentStatus    @default(PENDING)
+  paymentPhone    String?
+  mpesaRequestId  String?
+  mpesaReceipt    String?
+  paidAt          DateTime?
   createdAt       DateTime         @default(now())
   user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   property        Property         @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  agent           User?            @relation("AgentRequests", fields: [agentId], references: [id])
   inspectionReport InspectionReport?
 }
 

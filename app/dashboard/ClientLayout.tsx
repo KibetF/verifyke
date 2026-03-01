@@ -8,6 +8,7 @@ const clientNav = [
   { label: "Book Service", href: "/dashboard/book" },
   { label: "My Requests", href: "/dashboard/requests" },
   { label: "Reports", href: "/dashboard/reports" },
+  { label: "Settings", href: "/dashboard/settings" },
 ];
 
 export function ClientLayout({ children, userName }: { children: React.ReactNode; userName: string }) {

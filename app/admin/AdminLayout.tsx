@@ -3,7 +3,9 @@
 import { DashboardLayout } from "@/components/DashboardLayout";
 
 const adminNav = [
-  { label: "All Requests", href: "/admin" },
+  { label: "Overview", href: "/admin" },
+  { label: "All Requests", href: "/admin/requests" },
+  { label: "Agents", href: "/admin/agents" },
   { label: "Reports", href: "/admin/reports" },
 ];
 

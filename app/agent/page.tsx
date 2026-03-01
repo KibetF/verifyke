@@ -8,65 +8,60 @@ export default async function AgentPage() {
   const user = await requireRole("AGENT");
 
   const requests = await prisma.serviceRequest.findMany({
-    where: { status: { in: ["ASSIGNED", "COMPLETED"] } },
-    include: {
-      property: true,
-      user: true,
-      inspectionReport: { where: { agentId: user.id } },
-    },
+    where: { agentId: user.id },
+    include: { property: true, user: true },
     orderBy: { createdAt: "desc" },
   });
+
+  const active = requests.filter((r) => r.status === "ASSIGNED").length;
+  const completed = requests.filter((r) => r.status === "COMPLETED").length;
+  const recentRequests = requests.slice(0, 5);
 
   return (
     <AgentDashboardLayout userName={user.fullName}>
       <div className="space-y-6">
-        <h2 className="text-2xl font-bold text-slate-900">Assigned Requests</h2>
+        <h2 className="text-2xl font-bold text-slate-900">Overview</h2>
 
-        {requests.length === 0 ? (
-          <div className="bg-white rounded-xl border border-slate-200 p-12 text-center">
-            <p className="text-slate-500">No assigned requests.</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="bg-white rounded-xl border border-slate-200 p-6">
+            <p className="text-sm text-slate-500">Active Assignments</p>
+            <p className="text-3xl font-bold text-blue-600 mt-1">{active}</p>
           </div>
-        ) : (
-          <div className="grid gap-4">
-            {requests.map((req) => (
-              <div key={req.id} className="bg-white rounded-xl border border-slate-200 p-6">
-                <div className="flex justify-between items-start">
+          <div className="bg-white rounded-xl border border-slate-200 p-6">
+            <p className="text-sm text-slate-500">Completed</p>
+            <p className="text-3xl font-bold text-green-600 mt-1">{completed}</p>
+          </div>
+          <div className="bg-white rounded-xl border border-slate-200 p-6">
+            <p className="text-sm text-slate-500">Total Assigned</p>
+            <p className="text-3xl font-bold text-slate-900 mt-1">{requests.length}</p>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl border border-slate-200">
+          <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+            <h3 className="font-semibold text-slate-900">Recent Requests</h3>
+            <Link href="/agent/requests" className="text-sm text-slate-500 hover:text-slate-700">
+              View all →
+            </Link>
+          </div>
+          <div className="divide-y divide-slate-100">
+            {recentRequests.length === 0 ? (
+              <p className="px-6 py-4 text-sm text-slate-500">No requests assigned yet.</p>
+            ) : (
+              recentRequests.map((req) => (
+                <div key={req.id} className="px-6 py-4 flex justify-between items-center">
                   <div>
-                    <h3 className="font-semibold text-slate-900">{req.property.name}</h3>
-                    <p className="text-sm text-slate-500">
-                      {req.property.county} &middot; {req.serviceType}
+                    <p className="text-sm font-medium text-slate-900">{req.property.name}</p>
+                    <p className="text-xs text-slate-500">
+                      {req.property.county} · {req.serviceType}
                     </p>
-                    <p className="text-sm text-slate-500">Client: {req.user.fullName}</p>
-                    {req.scheduledDate && (
-                      <p className="text-sm text-slate-400 mt-1">
-                        Scheduled: {new Date(req.scheduledDate).toLocaleDateString()}
-                      </p>
-                    )}
-                    {req.property.latitude && req.property.longitude && (
-                      <p className="text-xs text-slate-400 mt-1">
-                        GPS: {req.property.latitude}, {req.property.longitude}
-                      </p>
-                    )}
                   </div>
-                  <div className="text-right space-y-2">
-                    <StatusBadge status={req.status} />
-                    {req.status === "ASSIGNED" && !req.inspectionReport && (
-                      <Link
-                        href={`/agent/report?requestId=${req.id}`}
-                        className="block text-sm bg-slate-900 text-white rounded-lg py-1.5 px-3 hover:bg-slate-800 mt-2"
-                      >
-                        Submit Report
-                      </Link>
-                    )}
-                    {req.inspectionReport && (
-                      <p className="text-xs text-green-600 mt-2">Report submitted</p>
-                    )}
-                  </div>
+                  <StatusBadge status={req.status} />
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
-        )}
+        </div>
       </div>
     </AgentDashboardLayout>
   );
