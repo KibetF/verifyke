@@ -1,12 +1,38 @@
 import Link from "next/link";
+import Image from "next/image";
 
-function FeatureIcon({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: "#0F766E" }}>
-      {children}
-    </div>
-  );
-}
+const services = [
+  {
+    title: "Property & Land Verification",
+    description:
+      "On-site property visits with GPS coordinate confirmation to verify exact location, boundaries, and access. Includes title deed cross-referencing.",
+    image: "/images/services/property-and-land-verification.jpg",
+  },
+  {
+    title: "Construction Oversight",
+    description:
+      "Periodic site visits to monitor construction progress, verify material usage, and document milestones with photo evidence.",
+    image: "/images/services/construction-oversight.jpg",
+  },
+  {
+    title: "Installation Verification",
+    description:
+      "Independent checks on fittings, fixtures, and installations to confirm work was completed to specification and standard.",
+    image: "/images/services/installation-verification.jpg",
+  },
+  {
+    title: "Concierge Verification",
+    description:
+      "A dedicated agent handles your full verification journey — from document collection to site visits — so you don\u2019t have to coordinate anything.",
+    image: "/images/services/concierge-verification.jpg",
+  },
+  {
+    title: "Ongoing Monitoring",
+    description:
+      "Subscription-based periodic inspections to track property status, construction progress, or tenancy conditions over time.",
+    image: "/images/services/ongoing-monitoring.jpg",
+  },
+];
 
 export default function HomePage() {
   return (
@@ -156,111 +182,30 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Site Inspections */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <FeatureIcon>
-                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                </svg>
-              </FeatureIcon>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: "#0B1F3B" }}>
-                Site Inspections
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
-                On-site property visits by verified field agents with comprehensive boundary and access checks.
-              </p>
-            </div>
-
-            {/* GPS Verification */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <FeatureIcon>
-                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
-                </svg>
-              </FeatureIcon>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: "#0B1F3B" }}>
-                GPS Verification
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
-                Precise GPS coordinate confirmation to verify exact property location and boundaries.
-              </p>
-            </div>
-
-            {/* Photo & Video Evidence */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <FeatureIcon>
-                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25z" />
-                </svg>
-              </FeatureIcon>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: "#0B1F3B" }}>
-                Photo & Video Evidence
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
-                High-resolution photography and video documentation with GPS timestamps.
-              </p>
-            </div>
-
-            {/* Detailed Risk Reports */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <FeatureIcon>
-                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
-                </svg>
-              </FeatureIcon>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: "#0B1F3B" }}>
-                Detailed Risk Reports
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
-                Structured reports with findings, risk assessments, and evidence for your due diligence.
-              </p>
-            </div>
-
-            {/* Construction Oversight */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <FeatureIcon>
-                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 4.5h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-                </svg>
-              </FeatureIcon>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: "#0B1F3B" }}>
-                Construction Oversight
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
-                Periodic site visits to monitor construction progress, verify material usage, and document milestones with photo evidence.
-              </p>
-            </div>
-
-            {/* Installation Verification */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <FeatureIcon>
-                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17l-5.67-5.67a8 8 0 1111.34 0l-5.67 5.67zm0 0l4.24 4.24m-4.24-4.24l-4.24 4.24M14.5 9.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                </svg>
-              </FeatureIcon>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: "#0B1F3B" }}>
-                Installation Verification
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
-                Independent checks on fittings, fixtures, and installations to confirm work was completed to specification and standard.
-              </p>
-            </div>
-
-            {/* Concierge Verification */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <FeatureIcon>
-                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                </svg>
-              </FeatureIcon>
-              <h3 className="text-lg font-semibold mb-2" style={{ color: "#0B1F3B" }}>
-                Concierge Verification
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
-                A dedicated agent handles your full verification journey — from document collection to site visits — so you don&apos;t have to coordinate anything.
-              </p>
-            </div>
+            {services.map((service) => (
+              <div
+                key={service.title}
+                className="bg-white rounded-xl border border-slate-200 overflow-hidden group hover:shadow-md transition-shadow"
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: "#0B1F3B" }}>
+                    {service.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "#475569" }}>
+                    {service.description}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
